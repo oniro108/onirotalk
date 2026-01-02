@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onirotalk - Painel Admin</title>
+  <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+  <link rel="stylesheet" href="../css/estilo_index.css">
+  <style>
+    .admin-container {
+      margin: 90px 20px 100px 20px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-panel {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .admin-panel h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #e74c3c;
+      padding-bottom: 15px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border-left: 4px solid #3498db;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #7f8c8d;
+      font-size: 14px;
+    }
+
+    .usuarios-list {
+      margin-top: 30px;
+    }
+
+    .usuario-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-left: 4px solid #3498db;
+      transition: transform 0.2s;
+    }
+
+    .usuario-card.banido {
+      border-left-color: #e74c3c;
+      background: #fde8e8;
+    }
+
+    .usuario-card.silenciado {
+      border-left-color: #f39c12;
+      background: #fff3e0;
+    }
+
+    .usuario-card.admin {
+      border-left-color: #27ae60;
+      background: #e8f5e8;
+    }
+
+    .usuario-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .usuario-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #3498db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 15px;
+    }
+
+    .usuario-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .usuario-info {
+      flex: 1;
+    }
+
+    .usuario-nome {
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .usuario-email {
+      color: #7f8c8d;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .usuario-stats {
+      display: flex;
+      gap: 15px;
+      font-size: 12px;
+      color: #95a5a6;
+    }
+
+    .usuario-status {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .status-admin {
+      background: #27ae60;
+      color: white;
+    }
+
+    .status-banido {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .status-silenciado {
+      background: #f39c12;
+      color: white;
+    }
+
+    .usuario-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .btn-silenciar {
+      background: #f39c12;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-banir {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-excluir {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-desfazer {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    .error {
+      text-align: center;
+      padding: 40px;
+      color: #e74c3c;
+      background: #fde8e8;
+      border-radius: 10px;
+    }
+
+    .admin-only {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="top-bar">
+    <div class="logo-container">
+      <img src="./logo.png" alt="Onirotalk" class="logo-image" onclick="window.location.href='index.html'">
+    </div>
+    <nav class="menu">
+      <a href="../pages/sobre.html">SOBRE</a>
+      <a href="../pages/faq.html">FAQ</a>
+      <a href="../pages/perfil.html">PERFIL</a>
+      <a href="../pages/admin.html" class="admin-only">ADMIN</a>
+    </nav>
+
+    <div class="user-box" onclick="window.location.href='perfil.html'" style="cursor: pointer;">
+      <div class="user-info">
+        <div class="user-avatar" id="header-avatar"></div>
+        <div>
+          <p class="user-name">Convidado</p>
+          <span class="online-status">Offline</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR ESQUERDA -->
+  <aside class="sidebar-left">
+    <button class="add-post" onclick="window.location.href='index.html'" title="Voltar ao Feed">🏠</button>
+  </aside>
+
+  <!-- CONTEÚDO CENTRAL -->
+  <main class="admin-container">
+    <div class="admin-panel">
+      <h1>Painel de Administração</h1>
+      
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <span class="stat-number" id="totalUsuarios">0</span>
+          <span class="stat-label">Total de Usuários</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="totalAdmins">0</span>
+          <span class="stat-label">Administradores</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="totalBanidos">0</span>
+          <span class="stat-label">Usuários Banidos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="totalSilenciados">0</span>
+          <span class="stat-label">Usuários Silenciados</span>
+        </div>
+      </div>
+
+      <div class="usuarios-list">
+        <h2>Lista de Usuários</h2>
+        <div id="usuariosContainer">
+          <div class="loading">Carregando usuários...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../script/admin.js"></script>
+  <script src="../script/script.js"></script>
+</body>
+</html>

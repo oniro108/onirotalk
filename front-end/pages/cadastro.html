@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onirotalk - Cadastro</title>
+    <link rel="icon" type="image/x-icon" href="../pages/favicon.png"> 
+    <link rel="stylesheet" href="../css/estilo_logecad.css">
+</head>
+<body>
+    <div class="container">
+        <div class="texto-container">
+            <h1 class="titulo">ONIROTALK</h1>
+            <p class="bemvindo">Crie sua conta.</p>
+        </div>
+        <div class="form-container">
+            <form id="cadastroForm">
+                <div class="input-group">
+                    <label for="nome">Nome de Usuário</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmaSenha">Confirmar Senha</label>
+                    <input type="password" id="confirmaSenha" name="confirmaSenha" required>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">Cadastrar</button>
+            </form>
+
+            <p class="login-link">Já tem uma conta? <a href="../pages/login.html">Faça login.</a></p>
+
+            <div id="mensagem" style="margin-top: 15px; color: #e74c3c; display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+            
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const confirmaSenha = document.getElementById('confirmaSenha').value;
+        const mensagemDiv = document.getElementById('mensagem');
+            
+        // limpar mensagem anterior
+        mensagemDiv.style.display = 'none';
+        mensagemDiv.textContent = '';
+            
+        // validação básica no front-end
+        if (senha !== confirmaSenha) {
+            mensagemDiv.style.display = 'block';
+            mensagemDiv.style.color = '#e74c3c';
+            mensagemDiv.textContent = 'As senhas não coincidem!';
+            return;
+        }
+            
+        if (senha.length < 6) {
+            mensagemDiv.style.display = 'block';
+            mensagemDiv.style.color = '#e74c3c';
+            mensagemDiv.textContent = 'A senha deve ter pelo menos 6 caracteres!';
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/cadastro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome, email, senha })
+            });
+                
+            const data = await response.json();
+                
+            if (data.erro) {
+                // erro
+                mensagemDiv.style.display = 'block';
+                mensagemDiv.style.color = '#e74c3c';
+                mensagemDiv.textContent = data.mensagem;
+            } else {
+                // cadastro deu certo
+                mensagemDiv.style.display = 'block';
+                mensagemDiv.style.color = '#2ecc71';
+                mensagemDiv.textContent = data.mensagem;
+                    
+                // salva user no localstorage
+                localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                    
+                // redireciona pro login em 2 segundos
+                setTimeout(() => {
+                    window.location.href = '../pages/login.html';
+                }, 2000);
+            }
+                
+            } catch (error) {
+                console.error('Erro:', error);
+                mensagemDiv.style.display = 'block';
+                mensagemDiv.style.color = '#e74c3c';
+                mensagemDiv.textContent = 'Erro ao conectar com o servidor';
+            }
+        });
+    </script>
+</body>
+</html>

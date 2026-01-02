@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onirotalk - Login</title>
+    <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+    <link rel="stylesheet" href="../css/estilo_logecad.css">
+</head>
+<body>
+    <div class="container">
+        <div class="texto-container">
+            <h1 class="titulo">ONIROTALK</h1>
+            <p class="bemvindo">Bem Vindo de Volta.</p>
+        </div>
+        <div class="form-container">
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">Entrar</button>
+            </form>
+
+            <p class="login-link">Não tem uma conta? <a href="../pages/cadastro.html">Cadastre-se.</a></p>
+
+            <div id="mensagem" style="margin-top: 15px; color: #e74c3c; display: none;"></div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+        const mensagemDiv = document.getElementById('mensagem');
+        
+        mensagemDiv.style.display = 'none';
+        mensagemDiv.textContent = '';
+        
+        try {
+            console.log('Dados do formulário:', { email, senha });
+            
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            });
+            
+            console.log('Status HTTP:', response.status);
+            console.log('Response OK?', response.ok);
+            
+            const data = await response.json();
+            console.log('Resposta da API:', data);
+            
+            if (data.erro) {
+                console.log('Erro da API:', data.mensagem);
+                mensagemDiv.style.display = 'block';
+                mensagemDiv.style.color = '#e74c3c';
+                mensagemDiv.textContent = data.mensagem;
+            } else {
+                console.log('Login bem-sucedido na API');
+                console.log('Dados do usuário recebidos:', data.usuario);
+                
+                // verificação da existência do usuário
+                if (!data.usuario) {
+                    console.log('ERRO: data.usuario é undefined.');
+                    mensagemDiv.style.display = 'block';
+                    mensagemDiv.style.color = '#e74c3c';
+                    mensagemDiv.textContent = 'Erro: Dados do usuário não recebidos';
+                    return;
+                }
+                
+                // salvar no localstorage
+                console.log('Tentando salvar no localStorage.');
+                localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                
+                // verificação imediata
+                const usuarioSalvo = localStorage.getItem('usuario');
+                console.log('Usuário salvo no localStorage:', usuarioSalvo);
+                
+                if (!usuarioSalvo) {
+                    console.log('ERRO: Falha ao salvar no localStorage.');
+                    mensagemDiv.style.display = 'block';
+                    mensagemDiv.style.color = '#e74c3c';
+                    mensagemDiv.textContent = 'Erro ao salvar sessão';
+                    return;
+                }
+                
+                console.log('Tudo certo! Redirecionando.');
+                mensagemDiv.style.display = 'block';
+                mensagemDiv.style.color = '#2ecc71';
+                mensagemDiv.textContent = 'Login realizado! Redirecionando...';
+                
+                setTimeout(() => {
+                    window.location.href = './index.html';
+                }, 1000);
+            }
+            
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            mensagemDiv.style.display = 'block';
+            mensagemDiv.style.color = '#e74c3c';
+            mensagemDiv.textContent = 'Erro ao conectar com o servidor: ' + error.message;
+        }
+      });
+    </script>
+</body>
+</html>

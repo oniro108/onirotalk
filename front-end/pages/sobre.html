@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onirotalk - Sobre</title>
+  <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+  <link rel="stylesheet" href="../css/estilo_index.css">
+  <link rel="stylesheet" href="../css/estilo_sobre.css">
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="top-bar">
+      <div class="logo-container">
+          <img src="./logo.png" 
+              alt="Onirotalk" 
+              class="logo-image"
+              onclick="window.location.href='index.html'">
+      </div>
+    <nav class="menu">
+      <a href="../pages/sobre.html">SOBRE</a>
+      <a href="../pages/faq.html">FAQ</a>
+      <a href="../pages/perfil.html" class="admin-only">PERFIL</a>
+      <a href="../pages/admin.html" class="admin-only">ADMIN</a>
+    </nav>
+
+    <div class="user-box" onclick="window.location.href='perfil.html'" style="cursor: pointer;">
+      <div class="user-info">
+        <div class="user-avatar" id="header-avatar">
+          <!-- avatar carregado via js -->
+        </div>
+        <div>
+          <p class="user-name">Convidado</p>
+          <span class="online-status">Offline</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR ESQUERDA -->
+  <aside class="sidebar-left">
+    <button class="add-post" onclick="window.location.href='index.html'" title="Voltar ao Feed">🏠</button>
+  </aside>
+
+  <!-- CONTEÚDO CENTRAL -->
+  <main class="content-sobre">
+    <div class="sobre-container">
+      <h1>Sobre o Onirotalk</h1>
+      
+      <div class="sobre-content">
+        <section class="sobre-section">
+          <h2>🌙 Nossa Missão</h2>
+          <p>
+            O <strong>Onirotalk</strong> nasceu da paixão por tudo que envolve a mente ou o cérebro em si. 
+            Somos uma comunidade dedicada ao estudo e prática de <strong>sonhos lúcidos</strong>, momentos 
+            onde uma vez que se sonha, se torna capaz de perceber que está sonhando e então toma controle do mesmo.
+          </p>
+        </section>
+
+        <section class="sobre-section">
+          <h2>💭 O que são Sonhos Lúcidos?</h2>
+          <p>
+            Sonhos lúcidos são experiências onde o sonhador adquire consciência de que está sonhando. 
+            Essa percepção abre portas para:
+          </p>
+          <ul>
+            <li>Explorar mundos dentro de sua mente</li>
+            <li>Superar medos e fobias em ambientes seguros</li>
+            <li>Praticar habilidades e criatividade</li>
+            <li>Ter experiências de autoconhecimento</li>
+          </ul>
+        </section>
+
+        <section class="sobre-section">
+          <h2>🤝 Nossa Comunidade</h2>
+          <p>
+            Acreditamos que o compartilhamento de experiências e conhecimentos acelera o aprendizado e encurta o caminho à lucidez. 
+            Aqui você encontrará:
+          </p>
+          <div class="comunidade-grid">
+            <div class="comunidade-item">
+              <h3>💡 Técnicas de Indução</h3>
+              <p>Métodos testados pela comunidade para induzir sonhos lúcidos</p>
+            </div>
+            <div class="comunidade-item">
+              <h3>👥 Suporte Coletivo</h3>
+              <p>Troque experiências com sonhadores de todos os níveis</p>
+            </div>
+            <div class="comunidade-item">
+              <h3>🔬 Base Científica</h3>
+              <p>Conteúdo fundamentado em pesquisas sobre sono e consciência</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="sobre-section">
+          <h2>🎯 Nossos Valores</h2>
+          <div class="valores-list">
+            <div class="valor-item">
+              <strong>Inclusividade</strong> - Todos são bem-vindos, de iniciantes a experts
+            </div>
+            <div class="valor-item">
+              <strong>Respeito</strong> - Cada experiência onírica é única e válida
+            </div>
+            <div class="valor-item">
+              <strong>Curiosidade</strong> - Incentivamos a exploração e questionamento
+            </div>
+            <div class="valor-item">
+              <strong>Segurança</strong> - Ambiente livre de julgamentos e críticas
+            </div>
+          </div>
+        </section>
+
+        <section class="sobre-section destaque">
+          <h2>🌟 Junte-se a Nós</h2>
+          <p>
+            Não importa se você nunca teve um sonho lúcido ou se já os experimenta regularmente, 
+            há sempre algo novo para descobrir. Nossa comunidade está aqui para apoiar sua jornada 
+            até à lucidez onírica.
+          </p>
+          <p class="chamada">
+            <em>"A maior aventura é a que acontece quando fechamos os olhos."</em>
+          </p>
+        </section>
+      </div>
+
+      <div class="sobre-footer">
+        <p>💭 <strong>Onirotalk</strong> - Explorando os limites da consciência, um sonho de cada vez.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="../script/script.js"></script>
+</body>
+</html>

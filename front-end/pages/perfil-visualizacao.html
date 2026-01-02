@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onirotalk - Perfil</title>
+  <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+  <link rel="stylesheet" href="../css/estilo_index.css">
+  <link rel="stylesheet" href="../css/estilo_perfil.css">
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="top-bar">
+      <div class="logo-container">
+          <img src="./logo.png" 
+              alt="Onirotalk" 
+              class="logo-image"
+              onclick="window.location.href='index.html'">
+      </div>
+    <nav class="menu">
+      <a href="../pages/sobre.html">SOBRE</a>
+      <a href="../pages/faq.html">FAQ</a>
+      <a href="../pages/perfil.html" class="admin-only">MEU PERFIL</a>
+      <a href="../pages/admin.html" class="admin-only">ADMIN</a>
+    </nav>
+
+    <div class="user-box" onclick="window.location.href='perfil.html'" style="cursor: pointer;">
+      <div class="user-info">
+        <div class="user-avatar" id="header-avatar">
+          <!-- avatar carregado via js -->
+        </div>
+        <div>
+          <p class="user-name">Convidado</p>
+          <span class="online-status">Offline</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR ESQUERDA -->
+  <aside class="sidebar-left">
+    <button class="add-post" onclick="window.location.href='index.html'" title="Voltar ao Feed">🏠</button>
+  </aside>
+
+  <!-- CONTEÚDO CENTRAL -->
+  <main class="content-perfil">
+    <div class="perfil-container">
+      <div class="perfil-header">
+        <div class="foto-perfil-container">
+          <div class="foto-perfil" id="fotoPerfil">
+            <!-- foto carregada via js -->
+          </div>
+        </div>
+        
+        <div class="info-basica">
+          <h1 id="nomeUsuario">Carregando...</h1>
+          <p class="email" id="emailUsuario">carregando@email.com</p>
+          <p class="membro-desde" id="dataCriacao">Membro desde: Carregando...</p>
+          <p class="bio" id="bioUsuario"></p>
+        </div>
+      </div>
+
+      <div class="perfil-stats">
+        <h3>Estatísticas</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number" id="totalPosts">0</span>
+            <span class="stat-label">Posts</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="totalLikes">0</span>
+            <span class="stat-label">Likes Recebidos</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="totalComentarios">0</span>
+            <span class="stat-label">Comentários</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="voltar-container">
+        <button onclick="window.history.back()" class="btn-voltar">← Voltar</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="../script/perfil_vis.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+Para rodar a plataforma Onirotalk, você deve ter instalado em seu dispositivo o Visual Studio Code, o Node.js e o MySQL. Baixe o arquivo compactado do projeto, extraia-o, e abra-o no Visual Studio Code (utilizando o atalho CTRL + K + O e selecionando o arquivo do projeto). Então, vá ao terminal, e digite o seguinte comando, sem aspas:
+"npm install express cors nodemon mysql2"
+Após baixar as dependências, vá à aba de extensões do Visual Studio Code e pesquise por "Live Server" por Ritwick Dey. Após isso, baixe o arquivo de dump do banco de dados, abra o MySQL Workbench, vá até sua query e digite o comando sem aspas:
+"CREATE DATABASE IF NOT EXISTS oniropfi;"
+Em seguida, o comando:
+"USE oniropfi"
+Então, vá à aba de Server, clique em "Data Import" e em Import Options, selecione o caminho do arquivo "database_dmp", certifique-se de que em cima do botão de Start Import, um pouco a esquerda, o dropdown esteja com a opção "Dump Structure and Data" selecionada, e clique em Start Import. Após isso, volte ao projeto no Visual Studio Code, e na pasta "back-end", em "db", terá um arquivo chamado "database.js", vá até ele e procure o seguinte código:
+///
+const dbConfig = {
+	host: "localhost",
+	user: "root",
+	password: "", -> COLOQUE A SENHA DO SEU MYSQL AQUI!
+	database: "oniropfi",
+	waitForConnections: true,
+	connectionLimit: 10,
+	queueLimit: 0
+};
+///
+Feito isso, finalmente, clique com o botão direito na pasta "back-end", e clique na opção "Open in Integrated Terminal" e execute o seguinte comando sem as aspas:
+"npm start"
+Se tudo correr bem, a seguinte mensagem irá aparecer "Servidor rodando na porta 3000" junto com outras mensagens. Então, vá à pasta "front-end", vá à "pages" e procure o arquivo "login.html", clique com o botão direito e selecione a opção "Open with Live Server". Após a página abrir, faça o login com as seguintes informações:
+Nome de Usuário: banca
+E-mail: banca@gmail.com
+Senha: bancapfi
+Confirmar Senha: bancapfi
+Ou clique em "Faça login." para criar uma conta, porém, a conta descrita é moderadora e fornece benefícios de administrador.
+

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onirotalk - Fórum de Sonhos Lúcidos</title>
+  <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+  <link rel="stylesheet" href="../css/estilo_index.css">
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="top-bar">
+      <div class="logo-container">
+          <img src="./logo.png" 
+              alt="Onirotalk" 
+              class="logo-image"
+              onclick="window.location.href='index.html'">
+      </div>
+
+    <nav class="menu">
+      <a href="../pages/sobre.html">SOBRE</a>
+      <a href="../pages/faq.html">FAQ</a>
+      <a href="../pages/perfil.html" class="admin-only">PERFIL</a>
+      <a href="../pages/admin.html" class="admin-only">ADMIN</a>
+    </nav>
+
+    <div class="user-box" onclick="window.location.href='perfil.html'" style="cursor:pointer;">
+      <div class="user-info">
+        <div class="user-avatar" id="header-avatar">
+          <!--avatar carregado via js-->
+        </div>
+        <div>
+          <p class="user-name">Convidado</p>
+          <span class="online-status">Offline</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR ESQUERDA -->
+  <aside class="sidebar-left">
+    <button class="icon-btn search-btn" onclick="abrirBusca()" title="Buscar">🔍</button>
+    <button class="add-post" onclick="abrirModalPost()" title="Novo Post">➕</button>
+  </aside>
+
+  <!-- CONTEÚDO CENTRAL -->
+  <main class="content">
+    <div id="posts-container">
+      <!-- Posts serão carregados aqui via JavaScript -->
+      <div class="loading">Carregando posts...</div>
+    </div>
+  </main>
+
+  <!-- SIDEBAR DIREITA -->
+  <aside class="sidebar-right">
+    <h3>NOTÍCIAS</h3>
+    <div class="news">
+      <div class="news-item">
+        <h4>Dica da Semana</h4>
+        <p>Mantenha um diário de sonhos para aumentar sua consciência onírica!</p>
+      </div>
+      <div class="news-item">
+        <h4>Evento Próximo</h4>
+        <p>Workshop de Sonhos Lúcidos - Sábado, 15h</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MODAL NOVO POST -->
+  <div id="modalPost" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModalPost()">&times;</span>
+      <h2>Criar Novo Post</h2>
+      <form id="formPost">
+        <div class="input-group">
+          <label for="postTitulo">Título</label>
+          <input type="text" id="postTitulo" required>
+        </div>
+        <div class="input-group">
+          <label for="postDescricao">Descrição</label>
+          <textarea id="postDescricao" rows="6" required></textarea>
+        </div>
+        <div class="input-group">
+          <label for="postImagem">Imagem</label>
+          <input type="file" id="postImagem" accept="image/*">
+          <div id="imagemPreview" class="imagem-preview" style="display: none;">
+            <img id="previewImg" src="#" alt="Preview">
+            <button type="button" onclick="removerImagem()">Remover</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-cadastrar">Publicar Post</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL EDIÇÃO DE POST -->
+  <div id="modalEditarPost" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModalEditarPost()">&times;</span>
+      <h2>Editar Postagem</h2>
+      <form id="formEditarPost">
+        <div class="input-group">
+          <label for="editarTitulo">Título</label>
+          <input type="text" id="editarTitulo" required>
+        </div>
+        <div class="input-group">
+          <label for="editarDescricao">Descrição</label>
+          <textarea id="editarDescricao" rows="6" required></textarea>
+        </div>
+        <div class="input-group">
+          <label for="editarImagem">Imagem</label>
+          <input type="file" id="editarImagem" accept="image/*">
+          <div id="editarImagemPreview" class="imagem-preview" style="display: none;">
+            <img id="editarPreviewImg" src="#" alt="Preview">
+            <button type="button" onclick="removerImagemEdicao()">Remover</button>
+          </div>
+          <div class="imagem-atual">
+            <small>Imagem atual:</small>
+            <div id="imagemAtualContainer"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-cadastrar">Atualizar Post</button>
+          <button type="button" class="btn-cancelar" onclick="fecharModalEditarPost()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL COMENTÁRIO -->
+  <div id="modalComentario" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="fecharModalComentario()">&times;</span>
+          <h2>Adicionar Comentário</h2>
+          <form id="formComentario">
+              <div class="input-group">
+                  <label for="comentarioConteudo">Comentário</label>
+                  <div class="format-toolbar">
+                      <button type="button" onclick="formatarTexto('bold')" title="Negrito"><b>B</b></button>
+                      <button type="button" onclick="formatarTexto('italic')" title="Itálico"><i>I</i></button>
+                      <button type="button" onclick="formatarTexto('strike')" title="Riscado"><s>S</s></button>
+                  </div>
+                  <textarea id="comentarioConteudo" rows="4" required placeholder="Digite seu comentário..."></textarea>
+              </div>
+              <button type="submit" class="btn-cadastrar">Comentar</button>
+          </form>
+      </div>
+  </div>
+
+  <!-- MODAL BUSCA -->
+  <div id="modalBusca" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="fecharModalBusca()">&times;</span>
+          <h2>Buscar Postagens</h2>
+          
+          <div class="busca-container">
+              <div class="input-group">
+                  <label for="buscaTermo">Termo de Busca</label>
+                  <input type="text" id="buscaTermo" placeholder="Digite palavras-chave...">
+              </div>
+              
+              <div class="filtros-container">
+                  <h3>Filtros</h3>
+                  
+                  <div class="filtro-grupo">
+                      <label for="filtroTipo">Buscar em:</label>
+                      <select id="filtroTipo">
+                          <option value="todos">Título e Conteúdo</option>
+                          <option value="titulo">Apenas Títulos</option>
+                          <option value="conteudo">Apenas Conteúdo</option>
+                          <option value="autor">Autor</option>
+                      </select>
+                  </div>
+                  
+                  <div class="filtro-grupo">
+                      <label for="filtroOrdenacao">Ordenar por:</label>
+                      <select id="filtroOrdenacao">
+                          <option value="recentes">Mais Recentes</option>
+                          <option value="antigos">Mais Antigos</option>
+                          <option value="likes">Mais Curtidos</option>
+                          <option value="comentarios">Mais Comentados</option>
+                      </select>
+                  </div>
+                  
+                  <div class="filtro-grupo">
+                      <label>
+                          <input type="checkbox" id="filtroApenasFixados">
+                          Apenas posts fixados
+                      </label>
+                  </div>
+                  
+                  <div class="filtro-grupo">
+                      <label>
+                          <input type="checkbox" id="filtroComImagens">
+                          Apenas posts com imagens
+                      </label>
+                  </div>
+                  
+                  <div class="filtro-grupo">
+                      <label for="filtroData">Período:</label>
+                      <select id="filtroData">
+                          <option value="todos">Todos os tempos</option>
+                          <option value="hoje">Hoje</option>
+                          <option value="semana">Esta semana</option>
+                          <option value="mes">Este mês</option>
+                          <option value="ano">Este ano</option>
+                      </select>
+                  </div>
+              </div>
+              
+              <div class="busca-actions">
+                  <button type="button" class="btn-buscar" onclick="executarBusca()">
+                      Buscar
+                  </button>
+                  <button type="button" class="btn-limpar" onclick="limparBusca()">
+                      Limpar
+                  </button>
+              </div>
+              
+              <div id="resultadosBusca" class="resultados-busca" style="display: none;">
+                  <h3>Resultados da Busca</h3>
+                  <div id="listaResultados" class="lista-resultados">
+                      <!-- results carregados aq -->
+                  </div>
+                  <div id="estatisticasBusca" class="estatisticas-busca"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- MODAL CONFIRMAÇÃO -->
+  <div id="modalConfirmacao" class="modal">
+    <div class="modal-content confirmacao">
+      <h3 id="confirmacaoTitulo">Confirmar ação</h3>
+      <p id="confirmacaoMensagem">Tem certeza que deseja realizar esta ação?</p>
+      <div class="confirmacao-actions">
+        <button id="btnConfirmarSim" class="btn-confirmar">Sim</button>
+        <button id="btnConfirmarNao" class="btn-cancelar" onclick="fecharModalConfirmacao()">Não</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script/script.js"></script>
+</body>
+</html>

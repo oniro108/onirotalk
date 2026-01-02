@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onirotalk - FAQ</title>
+  <link rel="icon" type="image/x-icon" href="../pages/favicon.png">
+  <link rel="stylesheet" href="../css/estilo_index.css">
+  <link rel="stylesheet" href="../css/estilo_faq.css">
+</head>
+<body>
+  <!-- TOPO -->
+  <header class="top-bar">
+      <div class="logo-container">
+          <img src="./logo.png" 
+              alt="Onirotalk" 
+              class="logo-image"
+              onclick="window.location.href='index.html'">
+      </div>
+    <nav class="menu">
+      <a href="../pages/sobre.html">SOBRE</a>
+      <a href="../pages/faq.html">FAQ</a>
+      <a href="../pages/perfil.html" class="admin-only">PERFIL</a>
+      <a href="../pages/admin.html" class="admin-only">ADMIN</a>
+    </nav>
+
+    <div class="user-box" onclick="window.location.href='perfil.html'" style="cursor: pointer;">
+      <div class="user-info">
+        <div class="user-avatar" id="header-avatar">
+          <!-- avatar carregado via js -->
+        </div>
+        <div>
+          <p class="user-name">Convidado</p>
+          <span class="online-status">Offline</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDEBAR ESQUERDA -->
+  <aside class="sidebar-left">
+    <button class="add-post" onclick="window.location.href='index.html'" title="Voltar ao Feed">🏠</button>
+  </aside>
+
+  <!-- CONTEÚDO CENTRAL -->
+  <main class="content-faq">
+    <div class="faq-container">
+      <h1>Perguntas Frequentes (FAQ)</h1>
+      
+      <!-- modo visualização pra users comuns -->
+      <div id="faqViewMode" class="faq-content">
+        <div id="faqContent">
+          <!-- conteúdo carregado aq -->
+          <div class="loading">Carregando FAQ...</div>
+        </div>
+      </div>
+
+      <!-- modo edição p/ admins -->
+      <div id="faqEditMode" class="faq-edit" style="display: none;">
+        <div class="edit-toolbar">
+          <button onclick="formatText('bold')" title="Negrito"><b>B</b></button>
+          <button onclick="formatText('italic')" title="Itálico"><i>I</i></button>
+          <button onclick="formatText('heading1')" title="Título 1">H1</button>
+          <button onclick="formatText('heading2')" title="Título 2">H2</button>
+          <button onclick="formatText('heading3')" title="Título 3">H3</button>
+          <button onclick="formatText('list')" title="Lista">•</button>
+          <button onclick="formatText('link')" title="Link">🔗</button>
+          <button onclick="formatText('code')" title="Código">{ }</button>
+          <span class="toolbar-separator">|</span>
+          <button onclick="previewFAQ()" title="Visualizar">👁️</button>
+        </div>
+
+        <textarea id="faqEditor" placeholder="Escreva o conteúdo do FAQ aqui usando Markdown..."></textarea>
+        
+        <div class="edit-actions">
+          <button onclick="salvarFAQ()" class="btn-salvar">Salvar FAQ</button>
+          <button onclick="cancelarEdicao()" class="btn-cancelar">Cancelar</button>
+        </div>
+
+        <div class="markdown-guide">
+          <h4>Guia Markdown:</h4>
+          <ul>
+            <li><code>**negrito**</code> → <b>negrito</b></li>
+            <li><code>*itálico*</code> → <i>itálico</i></li>
+            <li><code># Título 1</code> → Título grande</li>
+            <li><code>## Título 2</code> → Título médio</li>
+            <li><code>- item</code> → Lista</li>
+            <li><code>[link](url)</code> → Link</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- botão editar (admins) -->
+      <div id="adminControls" class="admin-controls" style="display: none;">
+        <button onclick="habilitarEdicao()" class="btn-editar">Editar FAQ</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="../script/faq.js"></script>
+  <script src="../script/script.js"></script>
+</body>
+</html>
