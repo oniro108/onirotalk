@@ -606,10 +606,10 @@ async function criarPostagem(event) {
         let url, method;
         
         if (postagemEditando) {
-            url = `http://localhost:3000/postagem/${postagemEditando}`;
+            url = `http://onirotalk-backend.onrender.com/postagem/${postagemEditando}`;
             method = 'PUT';
         } else {
-            url = 'http://localhost:3000/postagem';
+            url = 'http://onirotalk-backend.onrender.com/postagem';
             method = 'POST';
         }
 
