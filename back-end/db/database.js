@@ -14,7 +14,7 @@ const dbConfig = {
     database: process.env.DB_NAME,
     port: Number(process.env.DB_PORT),
     ssl: {
-        ca: fs.readFileSync(path.join(__dirname, "certs", "ca.pem"))
+        ca: fs.readFileSync(path.join(__dirname, "..", "certs", "ca.pem"))
     },
     waitForConnections: true,
     connectionLimit: 10,
