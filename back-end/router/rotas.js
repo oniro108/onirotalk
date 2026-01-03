@@ -325,17 +325,17 @@ rotas.get('/postagens', verificarBanimento, async (req, res) => {
         const postagensContadores = await Promise.all(
             postagens.map(async (postagem) => {
                 const [likes] = await connection.execute(
-                    'SELECT COUNT(*) as count FROM reacao WHERE tipo = "postagem" AND id_objeto = ? AND tipo_reacao = "like"',
+                    `SELECT COUNT(*) as count FROM reacao WHERE tipo = 'postagem' AND id_objeto = ? AND tipo_reacao = 'like'`,
                     [postagem.id]
                 );
 
                 const [deslikes] = await connection.execute(
-                    'SELECT COUNT(*) as count FROM reacao WHERE tipo = "postagem" AND id_objeto = ? AND tipo_reacao = "deslike"',
+                    `SELECT COUNT(*) as count FROM reacao WHERE tipo = 'postagem' AND id_objeto = ? AND tipo_reacao = 'deslike'`,
                     [postagem.id]
                 );
 
                 const [comentarios] = await connection.execute(
-                    'SELECT COUNT(*) as count FROM comentario WHERE postagem_id = ?',
+                    `SELECT COUNT(*) as count FROM comentario WHERE postagem_id = ?`,
                     [postagem.id]
                 );
 
