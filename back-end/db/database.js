@@ -6,7 +6,7 @@ const dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    port: 17102,
+    port: Number(process.env.DB_PORT),
     ssl: {
         rejectUnauthorized: false
     },
