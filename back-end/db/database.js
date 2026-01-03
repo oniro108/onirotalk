@@ -7,11 +7,10 @@ const dbConfig = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     port: Number(process.env.DB_PORT),
-    ssl: {
-        rejectUnauthorized: false
-    },
+    ssl: "Amazon RDS", 
     waitForConnections: true,
     connectionLimit: 10,
+    connectionTimeout: 20000,
     queueLimit: 0
 };
 
