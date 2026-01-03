@@ -1,4 +1,10 @@
 import mysql from "mysql2/promise";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // config de conexão com o mysql
 const dbConfig = {
@@ -7,7 +13,9 @@ const dbConfig = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     port: Number(process.env.DB_PORT),
-    ssl: "Amazon RDS", 
+    ssl: {
+        ca: fs.readFileSync(path.join(__dirname, "certs", "ca.pem"))
+    },
     waitForConnections: true,
     connectionLimit: 10,
     connectionTimeout: 20000,
