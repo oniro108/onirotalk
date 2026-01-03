@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     mensagemDiv.textContent = '';
     
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://onirotalk-backend.onrender.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

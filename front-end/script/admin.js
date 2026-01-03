@@ -68,7 +68,7 @@ async function carregarUsuarios() {
         console.log('Carregando usuários...');
         console.log('ID do usuário logado:', usuarioLogado.id);
         
-        const url = `http://localhost:3000/admin/usuarios?usuario_id=${usuarioLogado.id}`;
+        const url = `http://onirotalk-backend.onrender.com/admin/usuarios?usuario_id=${usuarioLogado.id}`;
         console.log('URL da req:', url);
 
         const response = await fetch(url);
@@ -185,7 +185,7 @@ function renderizarUsuarios() {
 
 async function silenciarUsuario(usuarioId) {
     try {
-        const response = await fetch(`http://localhost:3000/admin/silenciar`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/admin/silenciar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -215,7 +215,7 @@ async function silenciarUsuario(usuarioId) {
 
 async function desilenciarUsuario(usuarioId) {
     try {
-        const response = await fetch(`http://localhost:3000/admin/silenciar`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/admin/silenciar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -249,7 +249,7 @@ async function banirUsuario(usuarioId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/admin/banir`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/admin/banir`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -279,7 +279,7 @@ async function banirUsuario(usuarioId) {
 
 async function desbanirUsuario(usuarioId) {
     try {
-        const response = await fetch(`http://localhost:3000/admin/banir`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/admin/banir`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -313,7 +313,7 @@ async function excluirUsuario(usuarioId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/admin/excluir`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/admin/excluir`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

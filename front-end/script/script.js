@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const conteudo = document.getElementById('comentarioConteudo').value;
 
                 try {
-                    const response = await fetch('http://localhost:3000/comentario', {
+                    const response = await fetch('http://onirotalk-backend.onrender.com/comentario', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imagem = imagemSelecionada || imagemEditando;
 
                 try {
-                    const response = await fetch(`http://localhost:3000/postagem/${postagemEditando}`, {
+                    const response = await fetch(`http://onirotalk-backend.onrender.com/postagem/${postagemEditando}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -263,7 +263,7 @@ async function carregarPostagens() {
 
     try {
         console.log('Buscando postagens.');
-        const response = await fetch('http://localhost:3000/postagens');
+        const response = await fetch('http://onirotalk-backend.onrender.com/postagens');
         
         if (!response.ok) {
             throw new Error(`Erro HTTP: ${response.status}`);
@@ -297,7 +297,7 @@ async function carregarPostagens() {
 
 async function carregarPostagensConvidados() {
     try {
-        const response = await fetch('http://localhost:3000/postagens');
+        const response = await fetch('http://onirotalk-backend.onrender.com/postagens');
         const data = await response.json();
         
         if (!data.erro) {
@@ -341,7 +341,7 @@ async function carregarPostagensConvidados() {
 
 async function carregarComentarios(postagemId) {
     try {
-        const response = await fetch(`http://localhost:3000/comentarios/${postagemId}`);
+        const response = await fetch(`http://onirotalk-backend.onrender.com/comentarios/${postagemId}`);
         const data = await response.json();
         
         if (!data.erro) {
@@ -809,7 +809,7 @@ async function curtirPostagem(postagemId) {
     const jaCurtido = likeBtn.classList.contains('active');
     
     try {
-        const response = await fetch('http://localhost:3000/reacao', {
+        const response = await fetch('http://onirotalk-backend.onrender.com/reacao', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -858,7 +858,7 @@ async function descurtirPostagem(postagemId) {
     const jaDescurtido = deslikeBtn.classList.contains('active');
     
     try {
-        const response = await fetch('http://localhost:3000/reacao', {
+        const response = await fetch('http://onirotalk-backend.onrender.com/reacao', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -899,7 +899,7 @@ async function enviarReacao(tipo, id_objeto, tipo_reacao) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/reacao', {
+        const response = await fetch('http://onirotalk-backend.onrender.com/reacao', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -1018,7 +1018,7 @@ async function fixarPostagem(postagemId, estaFixado) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/postagem/${postagemId}/fixar`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/postagem/${postagemId}/fixar`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -1056,7 +1056,7 @@ async function deletarComentario(comentarioId, postagemId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/comentario/${comentarioId}`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/comentario/${comentarioId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -1409,7 +1409,7 @@ async function excluirPostagem(postagemId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/postagem/${postagemId}`, {
+        const response = await fetch(`http://onirotalk-backend.onrender.com/postagem/${postagemId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
