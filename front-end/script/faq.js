@@ -38,7 +38,7 @@ function verificarPermissoesAdmin() {
 
 async function carregarFAQ() {
     try {
-        const response = await fetch('http://onirotalk-backend.onrender.com/faq');
+        const response = await fetch('https://onirotalk-backend.onrender.com/faq');
         const data = await response.json();
         
         if (data.erro) {
@@ -97,7 +97,7 @@ async function salvarFAQ() {
     const novoConteudo = document.getElementById('faqEditor').value;
 
     try {
-        const response = await fetch('http://onirotalk-backend.onrender.com/faq', {
+        const response = await fetch('https://onirotalk-backend.onrender.com/faq', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

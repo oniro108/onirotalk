@@ -142,7 +142,7 @@ async function salvarPerfil(event) {
 
         console.log('Enviando dados:', dados);
 
-        const response = await fetch('http://onirotalk-backend.onrender.com/perfil', {
+        const response = await fetch('https://onirotalk-backend.onrender.com/perfil', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ async function carregarEstatisticas() {
     }
     
     try {
-        const response = await fetch(`http://onirotalk-backend.onrender.com/usuario/${usuarioPerfil.id}/estatisticas`);
+        const response = await fetch(`https://onirotalk-backend.onrender.com/usuario/${usuarioPerfil.id}/estatisticas`);
         const data = await response.json();
         
         if (!data.erro) {

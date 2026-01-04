@@ -36,7 +36,7 @@ function carregarUsuarioVisualizado() {
 async function buscarUsuario(usuarioId) {
     try {
         console.log('Buscando usuário no servidor.');
-        const response = await fetch(`http://onirotalk-backend.onrender.com/usuario/${usuarioId}`);
+        const response = await fetch(`https://onirotalk-backend.onrender.com/usuario/${usuarioId}`);
         
         if (!response.ok) {
             throw new Error(`Erro HTTP: ${response.status}`);
@@ -111,7 +111,7 @@ function atualizarInterfacePerfil() {
 async function carregarEstatisticas(usuarioId) {
     try {
         console.log('Carregando estatísticas.');
-        const response = await fetch(`http://onirotalk-backend.onrender.com/usuario/${usuarioId}/estatisticas`);
+        const response = await fetch(`https://onirotalk-backend.onrender.com/usuario/${usuarioId}/estatisticas`);
         const data = await response.json();
         
         if (!data.erro) {
